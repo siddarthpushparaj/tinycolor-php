@@ -454,11 +454,21 @@ class Color
     // `isValidCSSUnit`
     // Take in a single string / number and check to see if it looks like a CSS unit
     // (see `matchers` above for definition).
+    // private function isValidCSSUnit($color)
+    // {
+    //     return (bool)preg_match($this->matchers['CSS_UNIT'], $color);
+    //     // return !!matchers . CSS_UNIT . exec(color);
+    // }
     private function isValidCSSUnit($color)
-    {
-        return (bool)preg_match($this->matchers['CSS_UNIT'], $color);
-        // return !!matchers . CSS_UNIT . exec(color);
+{
+    // Ensure $color is a string
+    if ($color === null) {
+        return false;
     }
+
+    return (bool)preg_match($this->matchers['CSS_UNIT'], (string)$color);
+}
+
 
     // `stringInputToObject`
     // Permissive string parsing.  Take in a number of formats, and output an object
